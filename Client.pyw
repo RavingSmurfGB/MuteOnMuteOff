@@ -55,6 +55,7 @@ Muteoff = Image.open(r'C:\Users\Joe\Documents\GitHub\MuteOnMuteOff\Images\Muteof
 #This code mutes and mutes the mic
 def Mute():
     global m
+    global icon
     print("I GOT TO THE MUTE STAGE")
     os.system('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
     f = open("mute.dat", "w")
@@ -62,15 +63,13 @@ def Mute():
     f.close()
     m = "Muted"
     print(m)
-
-
-
     icon.stop
 
 
 #This code mutes and un mutes the mic
 def Unmute():
     global m
+    global icon
     print("I GOT TO THE UNMUTE STAGE")
     os.system('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')
     f = open("mute.dat", "w")
@@ -78,7 +77,6 @@ def Unmute():
     f.close()
     m = "Unmuted"
     print(m)
-
     icon.stop
 
 #This code will choose whether to mute ot not to mute...
@@ -93,27 +91,7 @@ def ToMuteOrNotToMute():
 
 
 
-
-#neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeds to be in a infinte loop (in another thread)
-#Alsoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo look in to using keyboard.on_release aswell # to act everytime you release the buttons
-# This code detects keyboard input and run the mute definition
-def hotkey():
-    while True:
-        if keyboard.is_pressed("ctrl") & keyboard.is_pressed("enter"):
-            print("You activated my trap card")
-            ToMuteOrNotToMute()
-            time.sleep(1)
-#////////////////////////////////
-
-
-
-
-#breakthread = True # this controls wether the while loop in main will run
-t = threading.Thread(target=hotkey, name = "(hi, I'm a thread)") # set's t to equal a variable
-t.start() # this starts the thread
-
-
-
+keyboard.add_hotkey("ctrl+enter", ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
 
 
 #////////////////////////////////Icon loop///////////////////////////////
