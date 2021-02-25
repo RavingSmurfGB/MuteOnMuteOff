@@ -54,7 +54,7 @@ Muteoff = Image.open(r'C:\Users\Joe\Documents\GitHub\MuteOnMuteOff\Images\Muteof
 
 #This code mutes and mutes the mic
 def Mute():
-    #global m
+    global m
     print("I GOT TO THE MUTE STAGE")
     os.system('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
     f = open("mute.dat", "w")
@@ -68,7 +68,7 @@ def Mute():
 
 #This code mutes and un mutes the mic
 def Unmute():
-    #global m
+    global m
     print("I GOT TO THE UNMUTE STAGE")
     os.system('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')
     f = open("mute.dat", "w")
@@ -84,6 +84,7 @@ def ToMuteOrNotToMute():
     global m
     if m == "Muted":
         Unmute()
+
 
     elif m == "Unmuted":
         Mute()
