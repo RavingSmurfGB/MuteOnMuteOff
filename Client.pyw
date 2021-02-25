@@ -52,6 +52,8 @@ Muteoff = Image.open(r'C:\\Users\\Joe\Documents\\GitHub\\MuteOnMuteOff\\Images\\
 
 #////////////////////////////////CORE CODE///////////////////////////////
 
+
+
 #This code mutes and mutes the mic
 def Mute():
     global m
@@ -63,7 +65,8 @@ def Mute():
     f.close()
     m = "Muted"
     print(m)
-    icon.stop
+    icon.stop()
+   
 
 
 #This code mutes and un mutes the mic
@@ -77,14 +80,14 @@ def Unmute():
     f.close()
     m = "Unmuted"
     print(m)
-    icon.stop
+    icon.stop()
+
 
 #This code will choose whether to mute ot not to mute...
 def ToMuteOrNotToMute():
     global m
     if m == "Muted":
         Unmute()
-
 
     elif m == "Unmuted":
         Mute()
@@ -106,10 +109,12 @@ while True:
         icon = pystray.Icon(name="name", icon=Muteon, title="Muted")
         icon.run()
 
+
     elif m == "Unmuted":
         #print("unmuted")
         icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted")
         icon.run()
+
 #////////////////////////////////
 
 
