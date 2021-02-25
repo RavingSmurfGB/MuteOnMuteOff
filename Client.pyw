@@ -42,8 +42,8 @@ except:
 
 #////////////////////////////////IMAGE FILES///////////////////////////////
 #This sets the variables Muteon and Muteoff to the pictures in the location.
-Muteon = Image.open(r'C:\Users\Joe\Documents\GitHub\MuteOnMuteOff\Images\Muteon.png')
-Muteoff = Image.open(r'C:\Users\Joe\Documents\GitHub\MuteOnMuteOff\Images\Muteoff.png')
+Muteon = Image.open(r'C:\\Users\\Joe\\Documents\\GitHub\\MuteOnMuteOff\\Images\\Muteon.png')
+Muteoff = Image.open(r'C:\\Users\\Joe\Documents\\GitHub\\MuteOnMuteOff\\Images\\Muteoff.png')
 #////////////////////////////////
 
 
@@ -106,7 +106,7 @@ while True:
         icon = pystray.Icon(name="name", icon=Muteon, title="Muted")
         icon.run()
 
-    if m == "Unmuted":
+    elif m == "Unmuted":
         #print("unmuted")
         icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted")
         icon.run()
