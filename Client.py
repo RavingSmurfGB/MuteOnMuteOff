@@ -1,6 +1,7 @@
-import pystray, os
+import pystray, os, keyboard
 from PIL import Image
 from pystray import MenuItem as item
+
 
 #Defining the variable m for whether mic is muted or not, this will change to load value on startup
 m = False
@@ -13,14 +14,22 @@ Muteoff = Image.open(r'C:\Users\Joe\Documents\GitHub\MuteOnMuteOff\Images\Muteof
 
 
 
-#This code mutes and un mutes the mic
+#This code mutes and mutes the mic
 def Mute():
     os.system('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
 
+#This code mutes and un mutes the mic
 def Unmute():
     os.system('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')
 
-Mute()
+
+# This code detects keyboard input and run the mute definition
+while True:
+    if keyboard.is_pressed("ctrl") & keyboard.is_pressed("enter"):
+        print("You pressed buttons")
+        break
+
+
 
 # This code will create an icon in the task bar and set to either the variable (pictue) Muteon or Muteoff
 # This code also will need to be run in a continues loop so threading is needed for any other code to run

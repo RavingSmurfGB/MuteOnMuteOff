@@ -1,1 +1,2 @@
-Pillow // pip install Pillow// for rendering image
+Pillow #pip install Pillow // for rendering image
+keyboard #pip3 install keyboard // for detecting keyborad input
