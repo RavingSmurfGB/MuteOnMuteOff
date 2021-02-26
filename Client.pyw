@@ -1,4 +1,4 @@
-import pystray, os, keyboard, subprocess
+import pystray, os, keyboard, subprocess, time
 from PIL import Image
 from pystray import MenuItem as item
 from pathlib import Path
@@ -18,23 +18,17 @@ with open("config.cfg") as fp:
             keyboard_interaction = line
 
 
-#takes the line for each item, selects the n'th character, strips off the newline (\n) and then puts it in quotes if keyboard
-keyboard_hotkey = '"' + keyboard_hotkey[17:].rstrip("\n") + '"'
+#takes the line for each item, selects the n'th character, strips off the newline (\n) 
+keyboard_hotkey = keyboard_hotkey[17:].rstrip("\n")
 logging = logging[9:].rstrip("\n")
-keyboard_interaction = keyboard_interaction[21:].rstrip("\n")
+keyboard_interaction = keyboard_interaction[22:].rstrip("\n")
 
 print(keyboard_hotkey)
 print(logging)
 print(keyboard_interaction)
 
-
-
-
-
 #Define variable M
 m = "unsure"
-#Defines the hotkey that will be used to mute & unmute
-keyboard_hotkey = "ctrl+enter" #TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTHIS VARIABLE IS NOT DYNAMICLY SET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 try: #Creates file if not exists for non-volitile storage
     my_file = Path("mute.dat")
@@ -69,9 +63,6 @@ except:
 
 
 
-
-
-
 #////////////////////////////////IMAGE FILES///////////////////////////////
 #This sets the variables Muteon and Muteoff to the pictures in the location.
 Muteon = Image.open(r'C:\\Users\\Joe\\Documents\\GitHub\\MuteOnMuteOff\\Images\\Muteon.png')
@@ -95,6 +86,7 @@ def Mute():
     f.close()
     m = "Muted"
     print(m)
+    time.sleep(.5)
     icon.visible = False
     icon.stop()
    
@@ -109,6 +101,7 @@ def Unmute():
     f.close()
     m = "Unmuted"
     print(m)
+    time.sleep(.5)
     icon.visible = False
     icon.stop()
 
@@ -139,6 +132,7 @@ def restart():
     print("restarted Program")
     subprocess.call("cmd /c relaunch.vbs")
     exit()
+
 #Opens the config file for the program
 def config_file():
     print("Opened config file")
@@ -156,15 +150,14 @@ def config_file():
 configure_menu = item('Configure', config_file, default=False)
 exit_menu = item('Exit', exit, default=False)
 relaunch_menu = item('Relaunch', restart, default=False)
-sound_panel_menu = item('Sound Panel', sound_panel, default=False)
+sound_panel_menu = item('Sound Panel', sound_panel, default=True)
 
 # This code will create an icon in the task bar and set to either the variable (pictue) Muteon or Muteoff
 # This code also will need to be run in a continues loop so threading is needed for any other code to run
 while True:
 
     if m == "Muted":
-        #print("muted")
-        menu = (relaunch_menu, exit_menu, configure_menu, sound_panel_menu) # these are the different menu items
+        menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
         icon = pystray.Icon(name="name", icon=Muteon, title="Muted", menu=menu)
 
         icon.run()
@@ -172,8 +165,7 @@ while True:
 
 
     elif m == "Unmuted":
-        #print("unmuted")
-        menu = (relaunch_menu, exit_menu, configure_menu, sound_panel_menu) # these are the different menu items
+        menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
         icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted", menu=menu)
 
         icon.run()
@@ -183,10 +175,9 @@ while True:
 
 ###TO DO LIST
 '''
-FIGURE OUT WHY keyboard.add_hotkey DOESNT ACCEPT MY STRING
-SET THE DEFUALT ACTION IN THE MENU
 CREATE SETUP FILE WHICH INSTALLS TO PROGRAM FILES
  -- THEN CHANGE FILE LOCATIONS IN THE PROGRAM
  -- PUT SHORTCUT IN STARTUP AND WINDOWS TASK BAR AUTO
  FIGURE OUT WHY THE ICON DISAPPEARES AFTER SO MANY USES
+ send notification via pystray
 '''
