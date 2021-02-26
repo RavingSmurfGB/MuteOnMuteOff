@@ -1,4 +1,4 @@
-import pystray, os, keyboard, subprocess, time
+import pystray, os, keyboard, subprocess
 from PIL import Image
 from pystray import MenuItem as item
 from pathlib import Path
