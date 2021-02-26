@@ -19,6 +19,9 @@ with open("config.cfg") as fp:
 
 
 #takes the line for each item, selects the n'th character, strips off the newline (\n) 
+
+
+
 keyboard_hotkey = keyboard_hotkey[17:].rstrip("\n")
 logging = logging[9:].rstrip("\n")
 keyboard_interaction = keyboard_interaction[22:].rstrip("\n")
@@ -80,14 +83,14 @@ def Mute():
     global m
     global icon
     print("I GOT TO THE MUTE STAGE")
-    os.system('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
+    subprocess.call('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
     f = open("mute.dat", "w")
     f.write("Muted")
     f.close()
     m = "Muted"
     print(m)
-    time.sleep(.5)
-    icon.visible = False
+    icon.notify(message= " ", title="Muted")
+    icon.visible = False #sets the icon invisible
     icon.stop()
    
 #This code mutes and un mutes the mic
@@ -95,13 +98,13 @@ def Unmute():
     global m
     global icon
     print("I GOT TO THE UNMUTE STAGE")
-    os.system('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')
+    subprocess.call('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')
     f = open("mute.dat", "w")
     f.write("Unmuted")
     f.close()
     m = "Unmuted"
     print(m)
-    time.sleep(.5)
+    icon.notify(message= " ", title="Unmuted")
     icon.visible = False
     icon.stop()
 
@@ -141,10 +144,6 @@ def config_file():
     subprocess.Popen([programName, fileName])
 #////////////////////////////////
 
-
-
-
-
 #////////////////////////////////Icon loop///////////////////////////////
 #Declares the menu itmes that will be used in the icon menu
 configure_menu = item('Configure', config_file, default=False)
@@ -159,7 +158,6 @@ while True:
     if m == "Muted":
         menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
         icon = pystray.Icon(name="name", icon=Muteon, title="Muted", menu=menu)
-
         icon.run()
 
 
@@ -167,7 +165,6 @@ while True:
     elif m == "Unmuted":
         menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
         icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted", menu=menu)
-
         icon.run()
 
 #////////////////////////////////
@@ -175,9 +172,9 @@ while True:
 
 ###TO DO LIST
 '''
+create a config entry to turn notifications on and off, then implement the config entry in the code
 CREATE SETUP FILE WHICH INSTALLS TO PROGRAM FILES
- -- THEN CHANGE FILE LOCATIONS IN THE PROGRAM
+ -- THEN CLEAN UP FILE LOCATIONS IN THE PROGRAM IN TO DIFFERENT FOLDERS
  -- PUT SHORTCUT IN STARTUP AND WINDOWS TASK BAR AUTO
- FIGURE OUT WHY THE ICON DISAPPEARES AFTER SO MANY USES
- send notification via pystray
+
 '''
