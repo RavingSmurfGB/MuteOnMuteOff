@@ -1,2 +1,3 @@
 Pillow #pip install Pillow // for rendering image
-keyboard #pip3 install keyboard // for detecting keyborad input
+keyboard #pip install keyboard // for detecting keyborad input
+pystray # pip install pystray // for showing the icon

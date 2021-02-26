@@ -1,10 +1,40 @@
-import pystray, os, keyboard, time, threading
+import pystray, os, keyboard, subprocess, time
 from PIL import Image
 from pystray import MenuItem as item
 from pathlib import Path
 
+#////////////////////////////////Startup///////////////////////////////
+
+#Goes through the config.cfg file and sets each pertinent line to a variable
+with open("config.cfg") as fp:
+    for i, line in enumerate(fp):
+        if i == 19: #grabs keyboard_hotkey: line
+            keyboard_hotkey = line
+            
+        elif i == 20: #grabs logging: line
+            logging = line
+
+        elif i == 21: #grabs keyboard_integration: line
+            keyboard_interaction = line
+
+
+#takes the line for each item, selects the n'th character, strips off the newline (\n) and then puts it in quotes if keyboard
+keyboard_hotkey = '"' + keyboard_hotkey[17:].rstrip("\n") + '"'
+logging = logging[9:].rstrip("\n")
+keyboard_interaction = keyboard_interaction[21:].rstrip("\n")
+
+print(keyboard_hotkey)
+print(logging)
+print(keyboard_interaction)
+
+
+
+
+
 #Define variable M
 m = "unsure"
+#Defines the hotkey that will be used to mute & unmute
+keyboard_hotkey = "ctrl+enter" #TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTHIS VARIABLE IS NOT DYNAMICLY SET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 try: #Creates file if not exists for non-volitile storage
     my_file = Path("mute.dat")
@@ -35,6 +65,8 @@ try: #Loads the vlalue from mute.dat and assigns it to the variable m
         print("VAIRBLAE WAS CHANGED")
 except:
     print("something really broke")
+#////////////////////////////////
+
 
 
 
@@ -50,10 +82,8 @@ Muteoff = Image.open(r'C:\\Users\\Joe\Documents\\GitHub\\MuteOnMuteOff\\Images\\
 
 
 
+
 #////////////////////////////////CORE CODE///////////////////////////////
-
-
-
 #This code mutes and mutes the mic
 def Mute():
     global m
@@ -65,10 +95,9 @@ def Mute():
     f.close()
     m = "Muted"
     print(m)
+    icon.visible = False
     icon.stop()
    
-
-
 #This code mutes and un mutes the mic
 def Unmute():
     global m
@@ -80,8 +109,8 @@ def Unmute():
     f.close()
     m = "Unmuted"
     print(m)
+    icon.visible = False
     icon.stop()
-
 
 #This code will choose whether to mute ot not to mute...
 def ToMuteOrNotToMute():
@@ -92,29 +121,72 @@ def ToMuteOrNotToMute():
     elif m == "Unmuted":
         Mute()
 
+#This code sets the key binding to Ctrl & Enter in order to active the ToMuteOrNotToMute function
+keyboard.add_hotkey(keyboard_hotkey, ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
+
+#Exits the program
+def exit():
+    icon.visible = False
+    icon.stop()
+    os._exit(0)
+
+#Opens the sound panel menu
+def sound_panel():
+    subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
+
+#Restarts the program
+def restart():
+    print("restarted Program")
+    subprocess.call("cmd /c relaunch.vbs")
+    exit()
+#Opens the config file for the program
+def config_file():
+    print("Opened config file")
+    programName = "notepad.exe"
+    fileName = "config.cfg"
+    subprocess.Popen([programName, fileName])
+#////////////////////////////////
 
 
-keyboard.add_hotkey("ctrl+enter", ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
+
 
 
 #////////////////////////////////Icon loop///////////////////////////////
+#Declares the menu itmes that will be used in the icon menu
+configure_menu = item('Configure', config_file, default=False)
+exit_menu = item('Exit', exit, default=False)
+relaunch_menu = item('Relaunch', restart, default=False)
+sound_panel_menu = item('Sound Panel', sound_panel, default=False)
+
 # This code will create an icon in the task bar and set to either the variable (pictue) Muteon or Muteoff
 # This code also will need to be run in a continues loop so threading is needed for any other code to run
-
-
 while True:
 
     if m == "Muted":
         #print("muted")
-        icon = pystray.Icon(name="name", icon=Muteon, title="Muted")
+        menu = (relaunch_menu, exit_menu, configure_menu, sound_panel_menu) # these are the different menu items
+        icon = pystray.Icon(name="name", icon=Muteon, title="Muted", menu=menu)
+
         icon.run()
+
 
 
     elif m == "Unmuted":
         #print("unmuted")
-        icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted")
+        menu = (relaunch_menu, exit_menu, configure_menu, sound_panel_menu) # these are the different menu items
+        icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted", menu=menu)
+
         icon.run()
 
 #////////////////////////////////
 
 
+###TO DO LIST
+'''
+FIGURE OUT WHY keyboard.add_hotkey DOESNT ACCEPT MY STRING
+SET THE DEFUALT ACTION IN THE MENU
+CREATE SETUP FILE WHICH INSTALLS TO PROGRAM FILES
+ -- THEN CHANGE FILE LOCATIONS IN THE PROGRAM
+ -- PUT SHORTCUT IN STARTUP AND WINDOWS TASK BAR AUTO
+ FIGURE OUT WHY THE ICON DISAPPEARES AFTER SO MANY USES
+'''
