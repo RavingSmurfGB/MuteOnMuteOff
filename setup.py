@@ -1,15 +1,15 @@
-import os, shutil, pathlib, ctypes, time, sys
+import os, shutil, pathlib, ctypes, time, sys, glob
 
 current_file_path = pathlib.Path(__file__).parent.absolute() #This will get the current file path but will not update if you move the setup.py, move the setup.py last 
 print(current_file_path)
 
+#-1. Relaunch program as admin if not:                          Not Working
+#0. Install pip requirements!!!                                 Not started
 
-#0. Install pip requirements!!!                                  ///not started
-
-#1. Move files to setup at launch
-#2. Move files to start menu
-#3. Move all files to program files in permanent location
-#4. Launch program
+#1. Move files to setup at launch:                              Done
+#2. Move files to start menu:                                   Done
+#3. Move all files to program files in permanent location       Not started
+#4. Launch program                                              Not started
 
 #*. Perhaps work on gui showing what is happening
 #*. Recreate the shortcuts under programfiles...
@@ -20,7 +20,7 @@ print(current_file_path)
 #-1.#////////////////////////////////Admin Check///////////////////////////////
 #Is ran to determine if the program was started with admin rights, if so continues, if not uac prompt 
 
-
+###DOES NOT WORK..................................................................................................................................
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -82,18 +82,32 @@ except:
 
 
 
-'''
+
 #3. ////////////////////////////////Moving Main Files///////////////////////////////
-print("Moving main files")
+
+ ###################################################################################################currently get's confused with subdirectories and errors
+print("Moving main files \n")
+
+
 source_dir = current_file_path
-target_dir = 'C:\Program Files ' #actual destination C:\Program Files 
+target_dir = 'C:\\Program Files\\MuteOnMuteOff ' #actual destinatiommmn C:\Program Files 
 file_names = os.listdir(source_dir)
 
-try:
-    print("Moving files to program files \n")
-    for file_name in file_names:
-        shutil.move(os.path.join(source_dir, file_name), target_dir)
-except:
-    print("ERROR: Most likley did not run as administrator")
+p = pathlib.Path(target_dir)
+
+for file_name in file_names:
+    if p.is_dir == False:
+        p.mkdir(target_dir)
+    shutil.move(os.path.join(source_dir, file_name), target_dir)  ## trie shutil.moveAndCreateDir insted!!!!!
+
+
+
+'''
+#try:
+print("Moving files to program files \n")
+for file_name in file_names:
+    shutil.move(os.path.join(source_dir, file_name), target_dir)  ## trie shutil.moveAndCreateDir insted!!!!!
+#except:
+ #   print("ERROR: Most likley did not run as administrator")
 #///////////////////////////////
 '''

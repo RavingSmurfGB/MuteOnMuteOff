@@ -1,36 +1,38 @@
-import pystray, os, keyboard, subprocess, time
+import pystray, os, keyboard, subprocess, yaml
 from PIL import Image
 from pystray import MenuItem as item
 from pathlib import Path
 
+#/////////////////////////// TO DO LIST ///////////////////////////////////////////////
+# 
+# clean up any unused code                                                                      Done
+# move essential program files to another directory                                             Partly
+# change image links to dynamic using pathlib
+# fix setup.py permissions errors
+# implement other configuration options import to code from file
+# implement 
+# look into using a windows command to mute microphone
+# look into querying whether the microphone is muted or not, rather than using mute.dat 
+# in setup.py detect whether the folders exist before copying
+# in setup.py have try/except in place to catch any errors
+# setup.py gui
+# setup.py option to reinstall
+
+
+
+
+
+
 #////////////////////////////////Startup///////////////////////////////
 
-#Goes through the config.cfg file and sets each pertinent line to a variable
-with open("config.cfg") as fp:
-    for i, line in enumerate(fp):
-        if i == 19: #grabs keyboard_hotkey: line
-            keyboard_hotkey = line
-            
-        elif i == 20: #grabs logging: line
-            logging = line
+#This loads the file config.cfg and then pulls and assigns each variable as needed
+with open("config.cfg", "r") as yamlfile:
+    data = yaml.load(yamlfile, Loader=yaml.SafeLoader)
+    print("Read successful")
 
-        elif i == 21: #grabs keyboard_integration: line
-            keyboard_interaction = line
+keyboard_hotkey = (data[0]['Configuration']['KEYBOARD_HOTKEY'])
 
-
-#takes the line for each item, selects the n'th character, strips off the newline (\n) 
-
-
-
-keyboard_hotkey = keyboard_hotkey[17:].rstrip("\n")
-logging = logging[9:].rstrip("\n")
-keyboard_interaction = keyboard_interaction[22:].rstrip("\n")
-
-print(keyboard_hotkey)
-print(logging)
-print(keyboard_interaction)
-
-#Define variable M
+#Define variable m to be used whether the microphone is currently muted or not
 m = "unsure"
 
 try: #Creates file if not exists for non-volitile storage
@@ -133,7 +135,7 @@ def sound_panel():
 #Restarts the program
 def restart():
     print("restarted Program")
-    subprocess.call("cmd /c relaunch.vbs")
+    subprocess.call("cmd /c \support_files\\relaunch.vbs")
     exit()
 
 #Opens the config file for the program
@@ -176,5 +178,6 @@ create a config entry to turn notifications on and off, then implement the confi
 CREATE SETUP FILE WHICH INSTALLS TO PROGRAM FILES
  -- THEN CLEAN UP FILE LOCATIONS IN THE PROGRAM IN TO DIFFERENT FOLDERS
  -- PUT SHORTCUT IN STARTUP AND WINDOWS TASK BAR AUTO
+
 
 '''
