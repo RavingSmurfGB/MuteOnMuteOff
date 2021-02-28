@@ -24,7 +24,8 @@ from pystray import MenuItem as item
 # setup.py option to reinstall
 # setup.py option to uninstall, passing through to a uninstall.py
 # change creation of file to use with open and pathlib where appropriate                        Done
-# re-write readme to make it fancy                                                              
+# re-write readme to make it fancy
+# Perhaps change name to PyMute                                                              
 
 
 #///////////////////////// Current errors:
