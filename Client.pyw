@@ -28,9 +28,11 @@ from pystray import MenuItem as item
 
 
 #///////////////////////// Current errors:
+
+#       perhaps lookinto https://superuser.com/questions/55598/super-key-to-pause-mute-mic-and-mute-speakers-in-windows
 # setup.py admin check does not work, ideally allways open as admin
 # setup.py cannot move all subdirectories, it does not create the subdirectories in the target location (permision error)
-# Client.pyw line 104 & 124 currently get the error but still run: The filename, directory name, or volume label syntax is incorrect.
+
 
 
 
@@ -106,12 +108,7 @@ def Mute():
     global m        #Sets m varible to be global so it can be read outisde of the function
     global icon     #Sets icon varible to be global so it can be read outisde of the function
     print("I GOT TO THE MUTE STAGE")
-    mute = current_file_path.joinpath("support_files\\SoundVolumeView.exe")
-    print(mute)
-    subprocess.call('cmd /c "start' + str(mute) + '/Unmute Scarlett Solo USB "')               ## getting following error when ran The filename, directory name, or volume label syntax is incorrect.
-
-
-    #subprocess.call('cmd /c "start SoundVolumeView.exe /Mute Scarlett Solo USB "')
+    subprocess.call('cmd /c "start support_files\\SoundVolumeView.exe /mute Scarlett Solo USB "')
     with open('support_files\\mute.dat', 'w') as file: #writes muted to mute.dat    
             file.write("Muted")
     m = "Muted"
@@ -127,11 +124,7 @@ def Unmute():
     global m        #Sets m varible to be global so it can be read outisde of the function
     global icon     #Sets icon varible to be global so it can be read outisde of the function
     print("I GOT TO THE UNMUTE STAGE")
-    mute = current_file_path.joinpath("support_files\\SoundVolumeView.exe")
-    print(mute)
-    subprocess.call('cmd /c "start' + str(mute) + '/Unmute Scarlett Solo USB "')                 ## getting following error when ran The filename, directory name, or volume label syntax is incorrect.
-
-    #subprocess.call('cmd /c "start SoundVolumeView.exe /Unmute Scarlett Solo USB "')        
+    subprocess.call('cmd /c "start support_files\\SoundVolumeView.exe /unmute Scarlett Solo USB "')
     with open('support_files\\mute.dat', 'w') as file: #writes unmuted to mute.dat    
             file.write("Unmuted")
     m = "Unmuted"
