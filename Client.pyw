@@ -15,14 +15,15 @@ from pystray import MenuItem as item
 # implement logitech LED control
 # implement logging # ideally converting print statements or summit
 # look into using a windows command to mute microphone
-# enable microphone selection 
-# look into querying whether the microphone is muted or not, rather than using mute.dat 
+#   enable microphone selection 
+#   look into querying whether the microphone is muted or not, rather than using mute.dat 
 # setup.py to get information from requirements and install, maybe using yaml??
 # in setup.py detect whether the folders exist before copying
 # in setup.py have try/except in place to catch any errors
 # setup.py gui
 # setup.py option to reinstall
 # setup.py option to uninstall, passing through to a uninstall.py
+# setup.exe to install python if not installed, then running setup.py
 # change creation of file to use with open and pathlib where appropriate                        Done
 # re-write readme to make it fancy
 # Perhaps change name to PyMute                                                              

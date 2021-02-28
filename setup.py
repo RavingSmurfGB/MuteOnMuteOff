@@ -1,4 +1,4 @@
-import os, shutil, pathlib, ctypes, time, sys, glob
+import os, shutil, pathlib, ctypes, time, sys, glob, subprocess, stat
 
 current_file_path = pathlib.Path(__file__).parent.absolute() #This will get the current file path but will not update if you move the setup.py, move the setup.py last 
 print(current_file_path)
@@ -90,14 +90,36 @@ print("Moving main files \n")
 
 
 source_dir = current_file_path
-target_dir = 'C:\\Program Files\\MuteOnMuteOff ' #actual destinatiommmn C:\Program Files 
-file_names = os.listdir(source_dir)
+target_dir = 'C:\\Program Files\\MuteOnMuteOff\\' #actual destinatiommmn C:\Program Files 
 
-p = pathlib.Path(target_dir)
+
+p = pathlib.Path(source_dir)
+
+
+def on_rm_error(func, path, exc_info):
+    #from: https://stackoverflow.com/questions/4829043/how-to-remove-read-only-attrib-directory-with-python-in-windows
+    os.chmod(path, stat.S_IWRITE)
+    os.unlink(path)
+
+
+for i in os.listdir(source_dir):
+    if i.endswith('.git'):
+        tmp = os.path.join(source_dir, i)
+        # We want to unhide the .git folder before unlinking it.
+        while True:
+            subprocess.call(['attrib', '-H', tmp])
+            break
+        shutil.rmtree(tmp, onerror=on_rm_error)
+
+source_dir = current_file_path
+file_names = os.listdir(source_dir)
 
 for file_name in file_names:
     if p.is_dir == False:
         p.mkdir(target_dir)
+    #if file_name == ".git": #
+        #path = os.path.join(source_dir, ".git") 
+        #shutil.rmtree(path)
     shutil.move(os.path.join(source_dir, file_name), target_dir)  ## trie shutil.moveAndCreateDir insted!!!!!
 
 
