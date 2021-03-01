@@ -23,8 +23,8 @@ from pystray import MenuItem as item
 # Perhaps change name to PyMute   
 
 # setup.py
-#   in setup.py detect whether the folders exist before copying                                 Partly
-#   in setup.py have try/except in place to catch any errors                                    Partly
+#   in setup.py detect whether the folders exist before copying                                 Done
+#   in setup.py have try/except in place to catch any errors                                    Done
 #   setup.py to get information from requirements and install, maybe using yaml??
 #   setup.py gui
 #   setup.py option to reinstall (using if statements, ideally taking input from gui)
