@@ -18,16 +18,21 @@ from pystray import MenuItem as item
 #   enable microphone selection 
 #   look into querying whether the microphone is muted or not, rather than using mute.dat
 #   perhaps use defualt microphone, and have the add  
-# setup.py to get information from requirements and install, maybe using yaml??
-# in setup.py detect whether the folders exist before copying
-# in setup.py have try/except in place to catch any errors
-# setup.py gui
-# setup.py option to reinstall
-# setup.py option to uninstall, passing through to a uninstall.py
-# setup.exe to install python if not installed, then running setup.py
 # change creation of file to use with open and pathlib where appropriate                        Done
 # re-write readme to make it fancy
-# Perhaps change name to PyMute                                                              
+# Perhaps change name to PyMute   
+
+# setup.py
+#   in setup.py detect whether the folders exist before copying                                 Partly
+#   in setup.py have try/except in place to catch any errors                                    Partly
+#   setup.py to get information from requirements and install, maybe using yaml??
+#   setup.py gui
+#   setup.py option to reinstall (using if statements, ideally taking input from gui)
+#   setup.py option to uninstall (using above gui)
+#   setup.exe to install python if not installed, then running setup.py
+
+
+                                                           
 
 
 #///////////////////////// Current errors:

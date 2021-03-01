@@ -36,7 +36,6 @@ else:
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
 
 
-
 #1.#////////////////////////////////Setting launch at Startup///////////////////////////////
 print("Setting program to start on boot")
 
@@ -49,38 +48,73 @@ dst_launch_startup_path = ("C:\\Users\\" + username + "\\AppData\\Roaming\\Micro
 src_launch_startup_path = current_file_path.joinpath("support_files\\startup") #Adds support_files\startup to the current file path
 print(src_launch_startup_path)
 
-if dst_launch_startup_path.joinpath("MuteOnMuteOff.lnk").exists() == False:
-    print("File already exists")
 
 
-file_names = os.listdir(src_launch_startup_path)
-for file_name in file_names:
-    shutil.move(os.path.join(src_launch_startup_path, file_name), dst_launch_startup_path)
+check_dst = dst_launch_startup_path + "\\MuteOnMuteOff.lnk" #Creates a full file path to startup file, to check if it exists already
+
+def startup_copy(): # Defines fucntion to copy seutp file, used later in logic
+    file_names = pathlib.Path.iterdir(src_launch_startup_path)
+    try:
+        for file_name in file_names:
+            shutil.copy(pathlib.PurePath.joinpath(src_launch_startup_path, file_name), dst_launch_startup_path)
+    except:
+        print("ERROR: could not copy files")
+
+
+if pathlib.Path(check_dst).is_file() == False:
+    # If there isnt a file in starup then:
+    print("Moving file to startup")
+    startup_copy()
+elif pathlib.Path(check_dst).is_file() == True:
+    #If there is a file in startup then:
+    if reinstall == False:
+        print("ERROR: Startup file already exsists under : \n" + "   " + check_dst + "\n Please select reinstall from the menu if you would like to continue")
+    if reinstall == True:
+        #insert code to delete file here
+        print("not yet implemented")
+
+
 #///////////////////////////////
 
 
 
 
-'''
 #2.#////////////////////////////////Adding to start menu///////////////////////////////
 
-#C:\ProgramData\Microsoft\Windows\Start Menu\Programs
+
 
 
 dst_launch_startup_path = ("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs") #Creates the path to startup, including the current user.
 src_launch_startup_path = current_file_path.joinpath("support_files\\start_menu") #Adds support_files\startup to the current file path
 print(src_launch_startup_path)
 
+check_dst = dst_launch_startup_path + "\\MuteOnMuteOff.lnk" #Creates a full file path to startup file, to check if it exists already
 
-try:
-    file_names = os.listdir(src_launch_startup_path)
-    for file_name in file_names:
-        shutil.move(os.path.join(src_launch_startup_path, file_name), dst_launch_startup_path)
-except:
-    print("ERROR: Most likley did not run as administrator")
+
+def start_menu_copy():
+    try:
+        file_names = pathlib.Path.iterdir(src_launch_startup_path)
+        for file_name in file_names:
+            shutil.copy(pathlib.PurePath.joinpath(src_launch_startup_path, file_name), dst_launch_startup_path)
+    except:
+        print("WARNING: Most likley did not run as administrator")
+
+if pathlib.Path(check_dst).is_file() == False:
+    print("Moving file to start_menu")
+    start_menu_copy()
+elif pathlib.Path(check_dst).is_file() == True:
+    #If there is a file in startup then:
+    if reinstall == False:
+        print("ERROR: Startup file already exsists under : \n" + "   " + check_dst + "\n Please select reinstall from the menu if you would like to continue")
+    if reinstall == True:
+        #insert code to delete file here
+        print("not yet implemented")
+
+
+
 #///////////////////////////////
 
-'''
+
 
 
 
