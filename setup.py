@@ -15,7 +15,7 @@ print(current_file_path)
 #*. Recreate the shortcuts under programfiles...
 #*. If already installed perhaps delete and reinstall
 
-
+reinstall = False
 
 #-1.#////////////////////////////////Admin Check///////////////////////////////
 #Is ran to determine if the program was started with admin rights, if so continues, if not uac prompt 
@@ -36,7 +36,7 @@ else:
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
 
 
-'''
+
 #1.#////////////////////////////////Setting launch at Startup///////////////////////////////
 print("Setting program to start on boot")
 
@@ -49,13 +49,15 @@ dst_launch_startup_path = ("C:\\Users\\" + username + "\\AppData\\Roaming\\Micro
 src_launch_startup_path = current_file_path.joinpath("support_files\\startup") #Adds support_files\startup to the current file path
 print(src_launch_startup_path)
 
+if dst_launch_startup_path.joinpath("MuteOnMuteOff.lnk").exists() == False:
+    print("File already exists")
 
 
 file_names = os.listdir(src_launch_startup_path)
 for file_name in file_names:
     shutil.move(os.path.join(src_launch_startup_path, file_name), dst_launch_startup_path)
 #///////////////////////////////
-'''
+
 
 
 
@@ -82,7 +84,7 @@ except:
 
 
 
-
+'''
 #3. ////////////////////////////////Moving Main Files///////////////////////////////
 
  ###################################################################################################currently get's confused with subdirectories and errors
@@ -91,9 +93,6 @@ print("Moving main files \n")
 
 source_dir = current_file_path
 target_dir = 'C:\\Program Files\\MuteOnMuteOff\\' #actual destinatiommmn C:\Program Files 
-
-
-p = pathlib.Path(source_dir)
 
 
 def on_rm_error(func, path, exc_info):
@@ -115,21 +114,7 @@ source_dir = current_file_path
 file_names = os.listdir(source_dir)
 
 for file_name in file_names:
-    if p.is_dir == False:
-        p.mkdir(target_dir)
-    #if file_name == ".git": #
-        #path = os.path.join(source_dir, ".git") 
-        #shutil.rmtree(path)
-    shutil.move(os.path.join(source_dir, file_name), target_dir)  ## trie shutil.moveAndCreateDir insted!!!!!
-
-
-
-'''
-#try:
-print("Moving files to program files \n")
-for file_name in file_names:
-    shutil.move(os.path.join(source_dir, file_name), target_dir)  ## trie shutil.moveAndCreateDir insted!!!!!
-#except:
- #   print("ERROR: Most likley did not run as administrator")
-#///////////////////////////////
+    if pathlib.Path(target_dir).is_dir() == False:
+        pathlib.Path(target_dir).mkdir()
+    shutil.move(os.path.join(source_dir, file_name), target_dir)
 '''

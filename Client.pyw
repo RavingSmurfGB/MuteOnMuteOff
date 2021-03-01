@@ -16,7 +16,8 @@ from pystray import MenuItem as item
 # implement logging # ideally converting print statements or summit
 # look into using a windows command to mute microphone
 #   enable microphone selection 
-#   look into querying whether the microphone is muted or not, rather than using mute.dat 
+#   look into querying whether the microphone is muted or not, rather than using mute.dat
+#   perhaps use defualt microphone, and have the add  
 # setup.py to get information from requirements and install, maybe using yaml??
 # in setup.py detect whether the folders exist before copying
 # in setup.py have try/except in place to catch any errors
@@ -32,8 +33,8 @@ from pystray import MenuItem as item
 #///////////////////////// Current errors:
 
 #       perhaps lookinto https://superuser.com/questions/55598/super-key-to-pause-mute-mic-and-mute-speakers-in-windows
-# setup.py admin check does not work, ideally allways open as admin
-# setup.py cannot move all subdirectories, it does not create the subdirectories in the target location (permision error)
+# setup.py admin check gives warning
+
 
 
 
