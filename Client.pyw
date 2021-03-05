@@ -166,8 +166,8 @@ def exit():
 
 #Opens the sound panel menu
 def sound_panel():
-    subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
-
+    subprocess.call('cmd /c "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,recording"') # starts sound panel directly to mic
+    #subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
 
 #Restarts the program
 def restart():

@@ -38,6 +38,18 @@ else:
 
 print("\n")
 
+
+
+#0.#////////////////////////////////Installing Requirements///////////////////////////////
+print("Installing requirments")
+subprocess.call('cmd /c "pip install -r requirements.txt"')
+
+
+
+
+
+
+
 #1.#////////////////////////////////Setting launch at Startup///////////////////////////////
 print("Setting program to start on boot")
 

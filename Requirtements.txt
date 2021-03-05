@@ -1,2 +1,4 @@
-keyboard #pip install keyboard // for detecting keyborad input
-pystray # pip install pystray // for showing the icon
+pillow 
+keyboard 
+pystray 
+progressbar2
