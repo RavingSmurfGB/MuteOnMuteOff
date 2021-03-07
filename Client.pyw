@@ -37,9 +37,9 @@ from pystray import MenuItem as item
 
 #///////////////////////// Current errors:
 
-#       perhaps lookinto https://superuser.com/questions/55598/super-key-to-pause-mute-mic-and-mute-speakers-in-windows
+#       perhaps lookinto https://superuser.com/questions/55598/super-key-to-pause-mute-mic-and-mute-speakers-in-windows ######################### THIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS
 # setup.py admin check gives warning
-
+# setup.py doesnt install requirements
 
 
 
@@ -166,8 +166,8 @@ def exit():
 
 #Opens the sound panel menu
 def sound_panel():
-    subprocess.call('cmd /c "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,recording"') # starts sound panel directly to mic
-    #subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
+    #subprocess.call('cmd /c "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,recording"') # starts sound panel directly to mic
+    subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
 
 #Restarts the program
 def restart():

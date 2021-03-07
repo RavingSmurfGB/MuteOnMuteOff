@@ -42,10 +42,11 @@ print("\n")
 
 #0.#////////////////////////////////Installing Requirements///////////////////////////////
 print("Installing requirments")
-subprocess.call('cmd /c "pip install -r requirements.txt"')
+subprocess.call('cmd /c "pip install -r Requirements.txt"') ## doesnt wooooooooooooooooooooooooooooooooooooooooooooooooooooooork!
 
 
 
+import progressbar
 
 
 
