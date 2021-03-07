@@ -42,7 +42,7 @@ print("\n")
 
 #0.#////////////////////////////////Installing Requirements///////////////////////////////
 print("Installing requirments")
-subprocess.call('cmd /c "pip install -r Requirements.txt"') ## doesnt wooooooooooooooooooooooooooooooooooooooooooooooooooooooork!
+subprocess.call('cmd /c "pip install -r Requirtements.txt"') ## doesnt wooooooooooooooooooooooooooooooooooooooooooooooooooooooork!
 
 
 
