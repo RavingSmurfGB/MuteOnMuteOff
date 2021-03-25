@@ -20,17 +20,23 @@ from pystray import MenuItem as item
 #   perhaps use defualt microphone, and have the add  
 # change creation of file to use with open and pathlib where appropriate                        Done
 # re-write readme to make it fancy
-# Perhaps change name to PyMute   
+# Change name to PyMute   
 
 # setup.py
+#   Detect whether client is currently running....  
 #   in setup.py detect whether the folders exist before copying                                 Done
 #   in setup.py have try/except in place to catch any errors                                    Done
-#   setup.py to get information from requirements and install, maybe using yaml??
-#   setup.py gui
-#   setup.py option to reinstall (using if statements, ideally taking input from gui)
-#   setup.py option to uninstall (using above gui)
-#   setup.exe to install python if not installed, then running setup.py
+#   setup.py to get information from requirements and install                                   Done
+#   setup.py pretify                
+#   setup.py haveing option to uninstall, reinstall using functions and logic
+#       option to leave the configuration file
+#       aswell as having the option to reinstall speicifc prts
 
+
+
+#Readme.md
+#   Insstructions on how to setup the program
+#   Instructions on how to setup the config file & their defualts
 
                                                            
 
@@ -39,7 +45,7 @@ from pystray import MenuItem as item
 
 #       perhaps lookinto https://superuser.com/questions/55598/super-key-to-pause-mute-mic-and-mute-speakers-in-windows ######################### THIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS
 # setup.py admin check gives warning
-# setup.py doesnt install requirements
+
 
 
 
@@ -92,6 +98,12 @@ try: #Loads the vlalue from mute.dat and assigns it to the variable m
 
 except:
     print("something really broke")
+
+#Get's the current process id of the program and writes it to a file (helps with setup detection)
+pid = str(os.getpid()) 
+with open('support_files\\current_pid.dat', 'w+') as file: #Creates mute.dat and writes Unmuted to it  # 'w+' can create, write and read the file  
+    file.write(pid)
+
 
 
 #This sets the variables Muteon and Muteoff to the .png's under Images.

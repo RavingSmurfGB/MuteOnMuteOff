@@ -1,14 +1,15 @@
 import os, shutil, pathlib, ctypes, time, sys, glob, subprocess, stat
 
+
 current_file_path = pathlib.Path(__file__).parent.absolute() #This will get the current file path but will not update if you move the setup.py, move the setup.py last 
 print(current_file_path)
 
-#-1. Relaunch program as admin if not:                          Not Working
-#0. Install pip requirements!!!                                 Not started
+#-1. Relaunch program as admin if not:                          Done (with error)
+#0. Install pip requirements!!!                                 Done
 
 #1. Move files to setup at launch:                              Done
 #2. Move files to start menu:                                   Done
-#3. Move all files to program files in permanent location       Not started
+#3. Move all files to program files in permanent location       Done
 #4. Launch program                                              Not started
 
 #*. Perhaps work on gui showing what is happening
@@ -135,10 +136,6 @@ print("\n")
 
 #3. ////////////////////////////////Moving Main Files///////////////////////////////
 
- ###################################################################################################currently get's confused with subdirectories and errors
-
-
-
 source_dir = current_file_path
 target_dir = 'C:\\Program Files\\MuteOnMuteOff\\' #actual destinatiommmn C:\Program Files 
 
@@ -184,3 +181,16 @@ elif pathlib.Path(target_dir).is_dir() == True:
     if reinstall == True:
         #insert code to delete file here
         print("not yet implemented")
+#///////////////////////////////
+
+
+
+
+
+#3. ////////////////////////////////Moving Main Files///////////////////////////////
+print("Starting Program")
+start_script = current_file_path.joinpath("support_files\\relaunch.vbs") #Adds the relaunch script to the current directory path
+subprocess.call("cmd /c " + str(start_script)) #str() is needed to convert the windows_path to a string for subproccess
+input("Press Enter to continue...") # Makes the user hit enter to conitnue
+exit()
+#///////////////////////////////
