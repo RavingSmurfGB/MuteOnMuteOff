@@ -136,15 +136,25 @@ print("\n")
 
 #3. ////////////////////////////////Moving Main Files///////////////////////////////
 
+
+
+maindir = "C:\\Py_Ormolu"
+projectname = "\\MuteOnMuteOff"
+target_dir = maindir + projectname
+
+if pathlib.Path(maindir).is_dir() == False: # We check if our main directory is in place ("This is used for multiple projects")
+    pathlib.Path(maindir).mkdir() # if does not exist create it!!
+    
+
 source_dir = current_file_path
-target_dir = 'C:\\Program Files\\MuteOnMuteOff\\' #actual destinatiommmn C:\Program Files 
+
+
 
 
 def on_rm_error(func, path, exc_info):
     #from: https://stackoverflow.com/questions/4829043/how-to-remove-read-only-attrib-directory-with-python-in-windows
     os.chmod(path, stat.S_IWRITE)
     os.unlink(path)
-
 
 
 
@@ -177,7 +187,7 @@ if pathlib.Path(target_dir).is_dir() == False:
 elif pathlib.Path(target_dir).is_dir() == True:
     #If there is a file in startup then:
     if reinstall == False:
-        print("ERROR: Main files already exsists under : \n" + "   " + check_dst + "\n Please select reinstall from the menu if you would like to continue")
+        print("ERROR: Main files already exsists under : \n" + "   " + target_dir + "\n Please select reinstall from the menu if you would like to continue")
     if reinstall == True:
         #insert code to delete file here
         print("not yet implemented")
