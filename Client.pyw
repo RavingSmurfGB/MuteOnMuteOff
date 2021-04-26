@@ -3,6 +3,30 @@ from PIL import Image
 from pystray import MenuItem as item
 
 
+
+
+
+
+
+#NEW PLAN
+#
+# I would like to be able to use one keyboard macro key (which does not have a normal key definition so cannot be listened to) 
+# to simply change the mute state
+# it should also update the icon aswell as give a notifcation if that is configured
+#
+# current PLAN
+#   if __name__ != "__main__":
+#   we can use this to detect if the program is being called from a different python file,
+#   if so we can just use the ToMuteOrNotToMute function to switch the mute state
+#   however we then need a way to update pystrays icon...
+#   also icon is not defined untill the while loop at the bottom...
+
+# perhaps we need a way for the actual python file to listen for an event or summit...
+
+
+
+
+
 #/////////////////////////// TO DO LIST ///////////////////////////////////////////////
 # 
 # clean up any unused code                                                                      Done
@@ -58,11 +82,13 @@ with open("config.cfg", "r") as yamlfile:
     data = yaml.load(yamlfile, Loader=yaml.SafeLoader)
     print("Config file read successful")
 
+
 keyboard_hotkey = (data[0]['Configuration']['KEYBOARD_HOTKEY'])
+second_keyboard_hotkey = (data[0]['Configuration']['SECOND_KEYBOARD_HOTKEY'])
 windows_notifications = (data[0]['Configuration']['WINDOWS_NOTIFICATIONS'])
 logging = (data[0]['Configuration']['LOGGING'])
 keyboard_integration = (data[0]['Configuration']['KEYBOARD_INTEGRATION'])
-microphone_to_use = (data[0]['Configuration']['MICROPHONE_TO_USE'])
+microphone_to_use = (data[0]['Configuration']['MICROPHONE_TO_USE'])                         #IMPLEMENT ME PLOX!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
 #Get the current directory for where the program is ran
@@ -158,72 +184,91 @@ def Unmute():
 #This code will choose whether to mute ot not to mute...
 def ToMuteOrNotToMute():
     global m
-    if m == "Muted":
+
+    with open('support_files\\mute.dat', 'rt') as file:
+        mute_file = file.read()
+
+    if mute_file == "Muted":
         Unmute()
 
-    elif m == "Unmuted":
+
+    elif mute_file == "Unmuted":
         Mute()
 
 
-#This code sets the key binding to Ctrl & Enter in order to active the ToMuteOrNotToMute function
-keyboard.add_hotkey(keyboard_hotkey, ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
-
-
-#Exits the program
-def exit():
-    icon.visible = False
-    icon.stop()
-    os._exit(0)
-
-
-#Opens the sound panel menu
-def sound_panel():
-    #subprocess.call('cmd /c "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,recording"') # starts sound panel directly to mic
-    subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
-
-#Restarts the program
-def restart():
-    print("restarted Program")
-    relaunch_script = current_file_path.joinpath("support_files\\relaunch.vbs") #Adds the relaunch script to the current directory path
-    subprocess.call("cmd /c " + str(relaunch_script)) #str() is needed to convert the windows_path to a string for subproccess
-    exit()
-
-
-#Opens the config file for the program
-def config_file():
-    print("Opened config file")
-    programName = "notepad.exe"
-    fileName = "config.cfg"
-    subprocess.Popen([programName, fileName])
-#////////////////////////////////
 
 
 
+if __name__ != "__main__": # Adding this if the program is called from another program it will do the bellow 
+    print("hi there other bud")
+    print("CODE CALLED FROM ANOTHER PROGRAM, EXITING...")
+
+
+
+if __name__ == "__main__": # Adding this if the program runs normally it will loop normally 
+    print("hi there bud")
+
+
+    #This code sets the key binding to Ctrl & Enter in order to active the ToMuteOrNotToMute function
+    keyboard.add_hotkey(keyboard_hotkey, ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
+    if second_keyboard_hotkey != None:
+        keyboard.add_hotkey(second_keyboard_hotkey, ToMuteOrNotToMute, args=(), suppress=False, timeout=1, trigger_on_release=False)
+
+    #Exits the program
+    def exit():
+        icon.visible = False
+        icon.stop()
+        os._exit(0)
+
+
+    #Opens the sound panel menu
+    def sound_panel():
+        #subprocess.call('cmd /c "rundll32.exe shell32.dll,Control_RunDLL mmsys.cpl,,recording"') # starts sound panel directly to mic
+        subprocess.call('cmd /c "start mmsys.cpl soundsmmsys.cpl sounds "')
+
+    #Restarts the program
+    def restart():
+        print("restarted Program")
+        relaunch_script = current_file_path.joinpath("support_files\\relaunch.vbs") #Adds the relaunch script to the current directory path
+        subprocess.call("cmd /c " + str(relaunch_script)) #str() is needed to convert the windows_path to a string for subproccess
+        exit()
+
+
+    #Opens the config file for the program
+    def config_file():
+        print("Opened config file")
+        programName = "notepad.exe"
+        fileName = "config.cfg"
+        subprocess.Popen([programName, fileName])
+    #////////////////////////////////
 
 
 
 
-#////////////////////////////////Icon loop///////////////////////////////
-#Declares the menu itmes that will be used in the icon menu
-configure_menu = item('Configure', config_file, default=False)
-exit_menu = item('Exit', exit, default=False)
-relaunch_menu = item('Relaunch', restart, default=False)
-sound_panel_menu = item('Sound Panel', sound_panel, default=True)
-
-# This code will create an icon in the task bar and set to either the variable (pictue) Muteon or Muteoff
-# This code also will need to be run in a continues loop so threading is needed for any other code to run
-while True:
-
-    if m == "Muted":
-        menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
-        icon = pystray.Icon(name="name", icon=Muteon, title="Muted", menu=menu)
-        icon.run()
 
 
 
-    elif m == "Unmuted":
-        menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
-        icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted", menu=menu)
-        icon.run()
+    #////////////////////////////////Icon loop///////////////////////////////
+    #Declares the menu itmes that will be used in the icon menu
+    configure_menu = item('Configure', config_file, default=False)
+    exit_menu = item('Exit', exit, default=False)
+    relaunch_menu = item('Relaunch', restart, default=False)
+    sound_panel_menu = item('Sound Panel', sound_panel, default=True)
 
-#////////////////////////////////
+    # This code will create an icon in the task bar and set to either the variable (pictue) Muteon or Muteoff
+    # This code also will need to be run in a continues loop so threading is needed for any other code to run
+    while True:
+
+        if m == "Muted":
+            menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
+            icon = pystray.Icon(name="name", icon=Muteon, title="Muted", menu=menu)
+            icon.run()
+
+
+
+        elif m == "Unmuted":
+            menu = pystray.Menu(relaunch_menu, exit_menu, configure_menu, sound_panel_menu) 
+            icon = pystray.Icon(name="name", icon=Muteoff, title="Unmuted", menu=menu)
+            icon.run()
+
+    #////////////////////////////////
