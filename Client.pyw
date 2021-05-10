@@ -144,17 +144,17 @@ Muteoff = Image.open("Images\\Muteoff.png")
 
 
 
-
-
-
-
 #////////////////////////////////CORE CODE///////////////////////////////
 #This code mutes and mutes the mic
 def Mute():
     global m        #Sets m varible to be global so it can be read outisde of the function
     global icon     #Sets icon varible to be global so it can be read outisde of the function
     print("I GOT TO THE MUTE STAGE")
-    subprocess.call('cmd /c "start support_files\\SoundVolumeView.exe /mute Focusrite Usb Audio "')
+    
+
+    
+
+    subprocess.run(["cmd", "/c", "start support_files\\SoundVolumeView.exe /mute " , microphone_to_use])
     with open('support_files\\mute.dat', 'w') as file: #writes muted to mute.dat    
             file.write("Muted")
     m = "Muted"
@@ -170,7 +170,9 @@ def Unmute():
     global m        #Sets m varible to be global so it can be read outisde of the function
     global icon     #Sets icon varible to be global so it can be read outisde of the function
     print("I GOT TO THE UNMUTE STAGE")
-    subprocess.call('cmd /c "start support_files\\SoundVolumeView.exe /unmute Focusrite Usb Audio "')
+    interface =  'Focusrite Usb Audio "'
+    subprocess.run(["cmd", "/c", "start support_files\\SoundVolumeView.exe /unmute " , microphone_to_use])
+
     with open('support_files\\mute.dat', 'w') as file: #writes unmuted to mute.dat    
             file.write("Unmuted")
     m = "Unmuted"
