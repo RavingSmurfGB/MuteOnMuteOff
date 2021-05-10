@@ -47,10 +47,25 @@ In this example we are configuring the Microhpone called Focusright Usb Audio
  1. Open Windows Sound Control Panel; Start > Control Panel > Hardware and Sound > Sound > Recordings tab
  2. Take note of the exact spelling which microphone you would like this program to use
  
-![alt text](https://imgur.com/a/hkul4qr "Logo Title Text 1")
+![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Windows%20Sound%20Control%20Panel.png "Logo Title Text 1")
+> Only use the second line, here we should use Focusright Usb Audio as the text
+ 3. Navitage to C:\Py_Ormolu\MuteOnMuteOff in Windows explorer
+ 4. Right click on config.cfg and open with, scroll down and select Notepad
+ 5. Scroll down under "Configuration:" and change the microhpone name fetched earlier after MICROPHONE_TO_USE:
+ ![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Windows%20Sound%20Control%20Panel.png "Logo Title Text 1")
+ 6. Save the file.
 
-[logo]: https://imgur.com/a/hkul4qr "Logo Title Text 2"
-### Setting Up the Hotkey
+### Configuring the Hotkey
+The default hotkey for the program is ctrl + enter, If you would like to change this:
+1. Navitage to C:\Py_Ormolu\MuteOnMuteOff in Windows explorer
+2. Right click on config.cfg and open with notepad, scroll down and select Notepad
+3. Scroll down under "Configuration:" and append after KEYBOARD_HOTKEY: the keys/key you would like to use
+> Enter the keys you would like to use exactly as seen on your keyboard, with a + inbetween then if you have multiple keys you would like to use.
+> The text entered should all be in lower case.
+
+Following these instructions above the default ctrl + enter
+
+Is changed to hhift
 
 
 
