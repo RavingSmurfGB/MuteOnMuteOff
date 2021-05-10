@@ -58,7 +58,9 @@ In this example we are configuring the Microhpone called Focusright Usb Audio
  3. Navitage to C:\Py_Ormolu\MuteOnMuteOff in Windows explorer
  4. Right click on config.cfg and open with, scroll down and select Notepad
  5. Scroll down under "Configuration:" and change the microhpone name fetched earlier after MICROPHONE_TO_USE:
+ 
  ![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Windows%20Sound%20Control%20Panel.png "Logo Title Text 1")
+ 
  6. Save the file.
 
 ### Configuring the Hotkey
