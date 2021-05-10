@@ -12,7 +12,12 @@ A Python script that mutes and unmutes your microphone, via hotkey or Macro!
 ## How It Works
 This program will mute and unmute your microhpone via a hotkey or a macro key.
 You will need python for this program and was created using Python 3.9.5 although the latest update should work!
+
 Download here: https://www.python.org/downloads/windows/
+
+The default hotkey to Mute/ Unmute is ctrl + enter
+
+You will need to confugre the microphone in order to use this program, see ...
 
 ## Installation
 ### Automated Install
@@ -47,7 +52,7 @@ In this example we are configuring the Microhpone called Focusright Usb Audio
  1. Open Windows Sound Control Panel; Start > Control Panel > Hardware and Sound > Sound > Recordings tab
  2. Take note of the exact spelling which microphone you would like this program to use
  
-![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Windows%20Sound%20Control%20Panel.png "Logo Title Text 1")
+![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Microhpone_config.png "Logo Title Text 1")
 > Only use the second line, here we should use Focusright Usb Audio as the text
  3. Navitage to C:\Py_Ormolu\MuteOnMuteOff in Windows explorer
  4. Right click on config.cfg and open with, scroll down and select Notepad
@@ -62,8 +67,15 @@ The default hotkey for the program is ctrl + enter, If you would like to change 
 3. Scroll down under "Configuration:" and append after KEYBOARD_HOTKEY: the keys/key you would like to use
 > Enter the keys you would like to use exactly as seen on your keyboard, with a + inbetween then if you have multiple keys you would like to use.
 > The text entered should all be in lower case.
+> 
+
+![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Hotkey_config.png "Logo Title Text 1")
+
 
 Following these instructions above the default ctrl + enter
+
+![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Hotkey_config.png "Logo Title Text 1")
+
 
 Is changed to hhift
 
