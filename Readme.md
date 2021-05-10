@@ -19,6 +19,7 @@ The default hotkey to Mute/ Unmute is ctrl + enter
 
 You will need to confugre the microphone in order to use this program, see ...
 
+
 ## Installation
 ### Automated Install
  1. Extract .zip
@@ -69,19 +70,24 @@ The default hotkey for the program is ctrl + enter, If you would like to change 
 > The text entered should all be in lower case.
 > 
 
-![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Hotkey_config.png "Logo Title Text 1")
-
 
 Following these instructions above the default ctrl + enter
 
 ![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/Hotkey_config.png "Logo Title Text 1")
 
 
-Is changed to hhift
+Is changed to shift + 1
+
+![alt text](https://github.com/RavingSmurfGB/MuteOnMuteOff/blob/master/Images/new%20hotkey.png "Logo Title Text 1")
 
 
+> A second hotkey can be configured if needed, it is confirable in the same configuration file, 
+> under the name SECOND_KEYBOARD_HOTKEY: 
+> 
+> By defualt it is f24
 
-
+> A keyboard with Macro keys can be used, however to use for best pracrices the key needs to be assigned to a unique keyboard key.
+> If possible assign your macro key to be f24, as this is already assigned in the program.
 
 
 ## References
