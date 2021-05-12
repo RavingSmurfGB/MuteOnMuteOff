@@ -2,3 +2,4 @@ pillow
 keyboard 
 pystray 
 progressbar2
+PyYAML
